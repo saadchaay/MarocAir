@@ -2,15 +2,13 @@ package com.marocair.util;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Database {
 
     private Statement stmt;
     private Connection cnx;
+    private PreparedStatement preStmt;
     public String URL;
     public String NAME;
     public String USER;
@@ -40,6 +38,13 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
+
+//    public boolean prepare(String request) throws SQLException {
+//        preStmt = cnx.prepareStatement(request);
+//        System.out.println(preStmt);
+//        ResultSet rs = preStmt.executeQuery();
+//        return rs.next();
+//    }
 
     public boolean execute(String rq) {
         this.query(rq);
