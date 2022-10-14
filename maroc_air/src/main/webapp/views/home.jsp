@@ -97,13 +97,18 @@
                     </select>
                 </div>
 
-                <div class="col-lg-6 mt-lg-4 mt-2">
+                <div class="col-lg-4 mt-lg-4 mt-2">
                     <label class="">Aller : </label>
                     <input class="form-control datepicker-1 flatpickr-input active" placeholder="Please select check in date" type="text" readonly="readonly">
                 </div>
-                <div class="col-lg-6 mt-lg-4 mt-2">
+                <div class="col-lg-4 mt-lg-4 mt-2">
                     <label class="">Retour : </label>
                     <input class="form-control datepicker-2 flatpickr-input active" placeholder="Please select check out date" type="text" readonly="readonly">
+                </div>
+
+                <div class="col-lg-4  mt-lg-4 mt-2  ">
+                    <label style="color: white">blanc </label>
+                    <button type="button" class="btn bg-gradient-dark w-100 ">Book now</button>
                 </div>
 
             </div>
@@ -114,6 +119,9 @@
 
 
 </header>
+
+
+
 
 <script src="https://loopple.s3.eu-west-3.amazonaws.com/soft-ui-design-system/js/core/bootstrap.min.js" type="text/javascript"></script>
 <script src="https://demos.creative-tim.com/soft-ui-design-system/assets/js/soft-design-system.min.js?v=1.0.5" type="text/javascript"></script>
