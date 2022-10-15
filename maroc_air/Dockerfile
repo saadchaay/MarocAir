@@ -1,3 +1,3 @@
 FROM tomcat:latest
 
-COPY target/JEETomcat /usr/local/tomcat/webapps/JEETomcat
+COPY target/maroc_air-1.0-SNAPSHOT /usr/local/tomcat/webapps/maroc_air

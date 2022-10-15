@@ -1,6 +1,5 @@
 package com.marocair.util;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
 
@@ -16,14 +15,13 @@ public class Database {
 
     public Database(){
         try {
-            Dotenv dotEnv = Dotenv.load();
-            URL = dotEnv.get("URL");
-            NAME = dotEnv.get("DB_NAME");
-            USER = dotEnv.get("USER");
-            PASS = dotEnv.get("PASSWORD");
+//            URL = dotEnv.get("URL");
+//            NAME = dotEnv.get("DB_NAME");
+//            USER = dotEnv.get("USER");
+//            PASS = dotEnv.get("PASSWORD");
             Class.forName("org.postgresql.Driver");
-            cnx = DriverManager.getConnection(URL+"\"" + NAME, USER, PASS);
-            System.out.println("Connection successfully");
+            cnx = DriverManager.getConnection("jdbc:postgresql://localhost:5000/" + "maroc_air", "postgres", "password");
+//            System.out.println("Connection successfully");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
