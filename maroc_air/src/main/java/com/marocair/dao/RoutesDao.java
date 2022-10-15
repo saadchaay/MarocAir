@@ -23,11 +23,10 @@ public class RoutesDao implements DAO<Routes>{
 
     @Override
     public void update(Routes routesDao, String[] params) {
-
     }
 
     @Override
     public void delete(long id) {
-
     }
 }
+
