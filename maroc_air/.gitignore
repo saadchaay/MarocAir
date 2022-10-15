@@ -14,6 +14,9 @@ target/
 
 ../.idea
 
+docker-compose.yaml
+Dockerfile
+
 ### Eclipse ###
 .apt_generated
 .classpath

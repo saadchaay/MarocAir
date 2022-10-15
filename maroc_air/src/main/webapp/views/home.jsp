@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.marocair.models.Cities" %><%--
   Created by IntelliJ IDEA.
   User: Youcode
   Date: 10/14/2022
@@ -57,69 +59,72 @@
         </div>
     </div>
 </nav>
+
 <header class="">
     <div class="page-header min-vh-75 m-3 border-radius-xl" style="background-image: url(https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80)">
         <span class="mask bg-gradient-dark"></span>
         <div class="container ">
-            <div class="row bg-white shadow-lg mt-n6 border-radius-md pb-4 p-3 mx-sm-0 mx-1 position-relative">
+            <form method="post" action="${pageContext.request.contextPath}/TestController" class="row bg-white shadow-lg mt-n6 border-radius-md pb-4 p-3 mx-sm-0 mx-1 position-relative">
                 <div class="col-lg-2 mt-lg-n2 mt-2">
                     <label class="">Type de voyage</label>
-                    <select class="form-control" name="choices-leave" id="round-trip" placeholder="1">
-                        <option value="Choice 1">Aller simple</option>
-                        <option value="Choice 2" selected>Aller-retour</option>
+                    <select class="form-control" name="round-trip" id="round-trip" placeholder="1">
+                        <option value="AllerSimple">Aller simple</option>
+                        <option value="AllerRetour" selected>Aller-retour</option>
                     </select>
                 </div>
                 <div class="col-lg-4 mt-lg-n2 mt-2">
+
+                    <% ArrayList<Cities> cities = (ArrayList<Cities>) request.getAttribute("cities"); %>
                     <label class="">Départ</label>
-                    <select class="form-control" name="choices-leave" id="departure-city" placeholder="1">
-                        <option value="Choice 1">Marrakech</option>
-                        <option value="Choice 2">Paris</option>
+                    <select class="form-control" name="departure-city" id="departure-city" placeholder="1">
+                        <% for(Cities city: cities){ %>
+                        <option value="<%=city.getId()%>"><%= city.getName() %></option>
+                        <%}%>
                     </select>
                 </div>
                 <div class="col-lg-4 mt-lg-n2 mt-2">
                     <label class="">Destination</label>
-                    <select class="form-control" name="choices-leave" id="destination-city" placeholder="1">
-                        <option value="Choice 1">Marrakech</option>
-                        <option value="Choice 2">Paris</option>
+                    <select class="form-control" name="destination-city" id="destination-city" placeholder="1">
+                        <% for(Cities city: cities){ %>
+                        <option value="<%=city.getId()%>"><%= city.getName() %></option>
+                        <%}%>
                     </select>
                 </div>
                 <div class="col-lg-2 mt-lg-n2 mt-2">
                     <label class="">Person</label>
-                    <select class="form-control" name="choices-leave" id="choices-person" placeholder="1">
-                        <option value="Choice 1" selected="">1</option>
-                        <option value="Choice 2">2</option>
-                        <option value="Choice 3">3</option>
-                        <option value="Choice 4">4</option>
-                        <option value="Choice 5">5</option>
-                        <option value="Choice 6">6</option>
-                        <option value="Choice 7">7</option>
-                        <option value="Choice 8">8</option>
+                    <select class="form-control" name="persons" id="persons" placeholder="1">
+                        <option value="1" selected="">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
                     </select>
                 </div>
 
                 <div class="col-lg-4 mt-lg-4 mt-2">
                     <label class="">Aller : </label>
-                    <input class="form-control datepicker-1 flatpickr-input active" placeholder="Please select check in date" type="text" readonly="readonly">
+                    <input name="departure-date" class="form-control datepicker-1 flatpickr-input active" placeholder="Please select check in date" type="date" readonly="readonly">
                 </div>
                 <div class="col-lg-4 mt-lg-4 mt-2">
                     <label class="">Retour : </label>
-                    <input class="form-control datepicker-2 flatpickr-input active" placeholder="Please select check out date" type="text" readonly="readonly">
+                    <input name="return-date" class="form-control datepicker-2 flatpickr-input active" placeholder="Please select check out date" type="date" readonly="readonly">
                 </div>
 
                 <div class="col-lg-4  mt-lg-4 mt-2  ">
                     <label style="color: white">blanc </label>
-                    <button type="button" class="btn bg-gradient-dark w-100 ">Book now</button>
+                    <button type="submit" class="btn bg-gradient-dark w-100">Book now</button>
                 </div>
 
-            </div>
+            </form>
 
         </div>
 
     </div>
 
-
 </header>
-
 
 
 
