@@ -1,6 +1,8 @@
 package com.marocair.dao;
 
 
+import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,6 @@ public interface DAO<T> {
 
     void update(T t, String[] params);
 
-    void delete(long id);
+    Boolean delete(long id);
 
 }

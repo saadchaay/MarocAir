@@ -27,7 +27,7 @@ public class ResRoutesDao implements DAO<Res_routes>{
     }
 
     @Override
-    public void delete(long id) {
-
+    public Boolean delete(long id) {
+        return false;
     }
 }

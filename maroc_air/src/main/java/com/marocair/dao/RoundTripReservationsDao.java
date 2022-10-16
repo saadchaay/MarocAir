@@ -25,7 +25,7 @@ public class RoundTripReservationsDao implements DAO<RoundTripReservations>{
     }
 
     @Override
-    public void delete(long id) {
-
+    public Boolean delete(long id) {
+        return false;
     }
 }

@@ -47,7 +47,9 @@ public class RoutesDao implements DAO<Routes>{
     }
 
     @Override
-    public void delete(long id) {
+    public Boolean delete(long id) {
+        String rqt = "DELETE FROM routes WHERE id = "+ id +";";
+        return db.execute(rqt);
     }
 }
 

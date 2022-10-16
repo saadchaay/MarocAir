@@ -41,7 +41,7 @@ public class CitiesDao implements DAO<Cities> {
     }
 
     @Override
-    public void delete(long id) {
-
+    public Boolean delete(long id) {
+        return false;
     }
 }

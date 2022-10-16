@@ -26,13 +26,18 @@ public class RouteTravelController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            request.setAttribute("routes", routesDao.getAll());
-            request.setAttribute("cites", citiesDao.getAll());
-            RequestDispatcher view = request.getRequestDispatcher("/admin/dashboard.jsp");
-            view.forward(request, response);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(Objects.equals(request.getParameter("action"), "delete")){
+            if(routesDao.delete(Long.parseLong(request.getParameter("routeId"))))
+                response.sendRedirect("/admin/route-trip");
+        }else{
+            try {
+                request.setAttribute("routes", routesDao.getAll());
+                request.setAttribute("cites", citiesDao.getAll());
+                RequestDispatcher view = request.getRequestDispatcher("/admin/dashboard.jsp");
+                view.forward(request, response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     @Override
@@ -48,6 +53,6 @@ public class RouteTravelController extends HttpServlet {
             request.setAttribute("errorMsg", "Failed add new trip, try again!!");
             request.getRequestDispatcher("/admin/new-route.jsp").forward(request, response);
         }
-
     }
+
 }
