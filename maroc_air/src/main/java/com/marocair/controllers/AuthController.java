@@ -33,10 +33,12 @@ public class AuthController extends HttpServlet {
             if(authDao.login(admin)) {
                 response.sendRedirect("/admin/route-trip");
             } else {
-                wr.println("hello : Im not logged in!!");
+//                wr.println("hello : Im not logged in!!");
                 HttpSession session = request.getSession();
                 session.setAttribute("username", admin.getUsername());
-                response.sendRedirect("/admin/authentication");
+                request.setAttribute("msgError", "Failed, Your username or password is incorrect");
+                request.getRequestDispatcher("/admin/auth.jsp").forward(request, response);
+//                response.sendRedirect("/admin/authentication");
 
             }
         } catch (SQLException e) {
