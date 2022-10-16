@@ -2,17 +2,13 @@ package com.marocair.controllers;
 
 import com.marocair.dao.CitiesDao;
 import com.marocair.dao.RoutesDao;
-import com.marocair.models.Cities;
 import com.marocair.models.Routes;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.Optional;
 
 //@WebServlet("/admin/")
 @WebServlet(name = "RouteTravelController", value = "/admin/route-trip")
