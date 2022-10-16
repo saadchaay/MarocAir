@@ -17,7 +17,7 @@
             <div>
               <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Admin Panel</h2>
             </div>
-            <form class="mt-8 space-y-6" action="${pageContext.request.contextPath}/admin/" method="POST" name="submit">
+            <form class="mt-8 space-y-6" action="${pageContext.request.contextPath}/admin/authentication" method="POST" name="submit">
               <input type="hidden" name="remember" value="true">
               <div class="-space-y-px rounded-md shadow-sm">
                 <div>
