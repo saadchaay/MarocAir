@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <title>Title</title>
@@ -24,11 +25,11 @@
                          alt="Workflow">
                   </div>
                   <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
-                    <a href="${pageContext.request.contextPath}/views/dashboard.jsp"
+                    <a href="${pageContext.request.contextPath}/admin/route-trip"
                        class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                       Dashboard
                     </a>
-                    <a href="${pageContext.request.contextPath}/views/new-route.jsp"
+                    <a href="${pageContext.request.contextPath}/admin/add-route-trip"
                        class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                       Add new route
                     </a>
@@ -65,7 +66,7 @@
                     <div class="py-4">
                       <div class="w-full overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
-                          <form action="#" method="POST">
+                          <form action="${pageContext.request.contextPath}/admin/route-trip" method="POST">
                             <div class="shadow sm:rounded-md sm:overflow-hidden">
                               <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
                                 <div>
@@ -74,25 +75,25 @@
 
                                 <div class="grid grid-cols-6 gap-6">
                                   <div class="col-span-6 sm:col-span-3">
-                                    <label for="departedduration" class="block text-sm font-medium text-gray-700">Departed duration</label>
-                                    <select id="departedduration" name="departedduration" autocomplete="departed-duration" class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                      <option>United States</option>
-                                      <option>Canada</option>
-                                      <option>Mexico</option>
+                                    <label for="start_city" class="block text-sm font-medium text-gray-700">Departed duration</label>
+                                    <select id="start_city" name="start_city" autocomplete="start_city" class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <c:forEach items="${cities}" var="city">
+                                      <option value="${city.id}">${city.name}</option>
+                                    </c:forEach>
                                     </select>
                                   </div>
 
                                   <div class="col-span-6 sm:col-span-3">
-                                    <label for="arrivalduration" class="block text-sm font-medium text-gray-700">Arrival duration</label>
-                                    <select id="arrivalduration" name="arrivalduration" autocomplete="arrival-duration" class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                      <option>United States</option>
-                                      <option>Canada</option>
-                                      <option>Mexico</option>
+                                    <label for="arrival_city" class="block text-sm font-medium text-gray-700">Arrival duration</label>
+                                    <select id="arrival_city" name="arrival_city" autocomplete="arrival_city" class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <c:forEach items="${cities}" var="city">
+                                            <option value="${city.id}">${city.name}</option>
+                                        </c:forEach>
                                     </select>
                                   </div>
 
                                   <div class="col-span-3">
-                                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                                    <label for="price" class="block text-sm font-medium text-gray-700">Price(DH)</label>
                                     <input type="text" name="price" id="price" autocomplete="price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                   </div>
 

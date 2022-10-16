@@ -6,12 +6,10 @@
         <title>JSP - Hello World</title>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-<%--        <h1><%= "Hello World!" %>--%>
-<%--        </h1>--%>
-<%--        <br/>--%>
-<%--        <a href="authentication">auth</a>--%>
     <body>
         Welcome home
+        <br>
+        <a href="${pageContext.request.contextPath}/admin/authentication">auth</a>
     </body>
 
 </html>

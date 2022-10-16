@@ -16,8 +16,8 @@ public class ClientDao implements DAO<Clients>{
     }
 
     @Override
-    public long save(Clients client) {
-        return 0;
+    public Boolean save(Clients client) {
+        return false;
     }
 
     @Override
