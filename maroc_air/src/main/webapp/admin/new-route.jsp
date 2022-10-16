@@ -75,7 +75,7 @@
 
                                 <div class="grid grid-cols-6 gap-6">
                                   <div class="col-span-6 sm:col-span-3">
-                                    <label for="start_city" class="block text-sm font-medium text-gray-700">Departed duration</label>
+                                    <label for="start_city" class="block text-sm font-medium text-gray-700">Start City</label>
                                     <select id="start_city" name="start_city" autocomplete="start_city" class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     <c:forEach items="${cities}" var="city">
                                       <option value="${city.id}">${city.name}</option>
@@ -84,7 +84,7 @@
                                   </div>
 
                                   <div class="col-span-6 sm:col-span-3">
-                                    <label for="arrival_city" class="block text-sm font-medium text-gray-700">Arrival duration</label>
+                                    <label for="arrival_city" class="block text-sm font-medium text-gray-700">Arrival City</label>
                                     <select id="arrival_city" name="arrival_city" autocomplete="arrival_city" class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <c:forEach items="${cities}" var="city">
                                             <option value="${city.id}">${city.name}</option>

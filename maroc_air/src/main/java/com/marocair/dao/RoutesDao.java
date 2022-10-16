@@ -15,7 +15,17 @@ public class RoutesDao implements DAO<Routes>{
         db = new Database();
     }
     @Override
-    public Optional<Routes> get(long id) {
+    public Optional<Routes> get(long id) throws SQLException {
+        String rqt = "SELECT * FROM routes WHERE id = "+ id +";";
+        ResultSet res = db.resultSet(rqt);
+        while (res.next()){
+            Routes route = new Routes();
+            route.setStart_city(res.getInt("start_city"));
+            route.setArrival_city(res.getInt("arrival_city"));
+            route.setPrice(res.getDouble("price"));
+            route.setDuration(res.getInt("duration"));
+            return Optional.of(route);
+        }
         return Optional.empty();
     }
     @Override
