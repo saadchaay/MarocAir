@@ -2,7 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.marocair.models.Cities" %>
 <%@ page import="com.marocair.models.Routes" %>
-<%@ page import="com.marocair.dao.CitiesDao" %><%--
+<%@ page import="com.marocair.dao.CitiesDao" %>
+<%@ page import="java.time.Duration" %><%--
   Created by IntelliJ IDEA.
   User: Youcode
   Date: 10/14/2022
@@ -89,8 +90,10 @@
                     <div class="cities-time w-6/12">
                         <div class="time font-weight-bold">10:30AM - 3:30PM</div>
                         <% double price = 0; %>
+                        <% int duration = 0; %>
                         <% for(Routes escale: possibleRoute){%>
                         <% price += escale.getPrice(); %>
+                        <% duration += escale.getDuration(); %>
                         <div class="cities d-flex flex-row align-items-center justify-content-start gap-2">
                             <div class="departure"><%= citiesDao.get(escale.getStart_city()).get().getName() %></div>
                             <i class="fa fa-arrows-h" aria-hidden="true"></i>
@@ -98,8 +101,10 @@
                         </div>
                         <%}%>
                     </div>
+                    <% int hours = duration / 60; %>
+                    <% int minutes = duration % 60; %>
                     <div class="escale w-3/12"><%= possibleRoute.size() %> escales</div>
-                    <div class="duration w-3/12">3h 25min</div>
+                    <div class="duration w-3/12"><%=hours%>h <%= minutes%>min</div>
                 </div>
                 <div class="card-pricing d-flex w-3/12 flex-column align-items-center justify-content-center">
                     <div class="price font-weight-bold"><%= price %> $</div>
