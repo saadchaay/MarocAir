@@ -1,7 +1,8 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.marocair.models.Cities" %>
-<%@ page import="com.marocair.models.Routes" %><%--
+<%@ page import="com.marocair.models.Routes" %>
+<%@ page import="com.marocair.dao.CitiesDao" %><%--
   Created by IntelliJ IDEA.
   User: Youcode
   Date: 10/14/2022
@@ -75,6 +76,7 @@
 </nav>
 
 <% ArrayList<ArrayList<Routes>> possibleRoutes = (ArrayList<ArrayList<Routes>>) request.getAttribute("possibleRoutes"); %>
+<% CitiesDao citiesDao = new CitiesDao(); %>
 
 
 <header class="position-relative z-index-3 ">
@@ -88,9 +90,9 @@
                         <div class="time font-weight-bold">10:30AM - 3:30PM</div>
                         <% for(Routes escale: possibleRoute){%>
                         <div class="cities d-flex flex-row align-items-center justify-content-start gap-2">
-                            <div class="departure"><%= escale.getStart_city() %></div>
+                            <div class="departure"><%= citiesDao.get(escale.getStart_city()).get().getName() %></div>
                             <i class="fa fa-arrows-h" aria-hidden="true"></i>
-                            <div class="destination"><%= escale.getArrival_city() %></div>
+                            <div class="destination"><%= citiesDao.get(escale.getArrival_city()).get().getName() %></div>
                         </div>
                         <%}%>
                     </div>

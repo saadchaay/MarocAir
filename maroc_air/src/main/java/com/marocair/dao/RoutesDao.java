@@ -22,7 +22,7 @@ public class RoutesDao implements DAO<Routes>{
     public List<Routes> getAll() {
         try{
             Database db = new Database();
-            String query = "select * from " + table;
+            String query = "select * from " + table ;
             ResultSet resultSet = db.resultSet(query);
             ArrayList<Routes> routes = new ArrayList<>();
             while(resultSet.next()){

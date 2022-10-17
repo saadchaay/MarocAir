@@ -15,7 +15,20 @@ public class CitiesDao implements DAO<Cities> {
 
     @Override
     public Optional<Cities> get(long id) {
-        return Optional.empty();
+        try{
+            Database db = new Database();
+            String query = "select * from " + table + " where id = " + id;
+            ResultSet resultSet = db.resultSet(query);
+            Cities city = new Cities();
+            while(resultSet.next()){
+                city.setId(resultSet.getInt("id"));
+                city.setName(resultSet.getString("name"));
+            }
+            return Optional.of(city);
+        }catch(Exception exception){
+
+            return Optional.empty();
+        }
     }
 
     @Override
