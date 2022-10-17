@@ -1,6 +1,9 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.marocair.models.Cities" %><%--
+<%@ page import="com.marocair.models.Cities" %>
+<%@ page import="com.marocair.models.Routes" %>
+<%@ page import="com.marocair.dao.CitiesDao" %>
+<%@ page import="java.time.Duration" %><%--
   Created by IntelliJ IDEA.
   User: Youcode
   Date: 10/14/2022
@@ -20,6 +23,19 @@
     <link href="https://demos.creative-tim.com/soft-ui-design-system/assets/css/nucleo-svg.css" rel="stylesheet" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loopple/loopple.css">
+
+    <style>
+        #submit-button{
+            background-color: transparent;
+            color: red;
+        }
+        #submit-button:hover{
+            background-color: red;
+            color: white;
+            border: transparent;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -60,71 +76,47 @@
     </div>
 </nav>
 
-<header class="">
-    <div class="page-header min-vh-75 m-3 border-radius-xl" style="background-image: url(https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80)">
+<% ArrayList<ArrayList<Routes>> possibleRoutes = (ArrayList<ArrayList<Routes>>) request.getAttribute("possibleRoutes"); %>
+<% CitiesDao citiesDao = new CitiesDao(); %>
+
+
+<header class="position-relative z-index-3 ">
+    <div class="page-header min-vh-75 m-3 d-flex flex-column  border-radius-xl" style="background-image: url(https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80)">
         <span class="mask bg-gradient-dark"></span>
-        <div class="container ">
-            <form method="post" action="${pageContext.request.contextPath}/TestController" class="row bg-white shadow-lg mt-n6 border-radius-md pb-4 p-3 mx-sm-0 mx-1 position-relative">
-                <div class="col-lg-2 mt-lg-n2 mt-2">
-                    <label class="">Type de voyage</label>
-                    <select class="form-control" name="round-trip" id="round-trip" placeholder="1">
-                        <option value="AllerSimple">Aller simple</option>
-                        <option value="AllerRetour" selected>Aller-retour</option>
-                    </select>
-                </div>
-                <div class="col-lg-4 mt-lg-n2 mt-2">
-
-                    <% ArrayList<Cities> cities = (ArrayList<Cities>) request.getAttribute("cities"); %>
-                    <label class="">Départ</label>
-                    <select class="form-control" name="departure-city" id="departure-city" placeholder="1">
-                        <% for(Cities city: cities){ %>
-                        <option value="<%=city.getId()%>"><%= city.getName() %></option>
+        <%         for(ArrayList<Routes> possibleRoute: possibleRoutes){ %>
+        <div class="container w-11/12 text-gray-600">
+            <div class="card-container bg-white mx-6 my-2 mt-4 d-flex w-full flex-row justify-content-between rounded border border-gray-200 p-3 pe-6 ps-0">
+                <div class="card-info d-flex flex-row align-items-center justify-content-around" style="width: 80%">
+                    <div class="cities-time w-6/12">
+                        <div class="time font-weight-bold">10:30AM - 3:30PM</div>
+                        <% double price = 0; %>
+                        <% int duration = 0; %>
+                        <% for(Routes escale: possibleRoute){%>
+                        <% price += escale.getPrice(); %>
+                        <% duration += escale.getDuration(); %>
+                        <div class="cities d-flex flex-row align-items-center justify-content-start gap-2">
+                            <div class="departure"><%= citiesDao.get(escale.getStart_city()).get().getName() %></div>
+                            <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                            <div class="destination"><%= citiesDao.get(escale.getArrival_city()).get().getName() %></div>
+                        </div>
                         <%}%>
-                    </select>
+                    </div>
+                    <% int hours = duration / 60; %>
+                    <% int minutes = duration % 60; %>
+                    <div class="escale w-3/12"><%= possibleRoute.size() %> escales</div>
+                    <div class="duration w-3/12"><%=hours%>h <%= minutes%>min</div>
                 </div>
-                <div class="col-lg-4 mt-lg-n2 mt-2">
-                    <label class="">Destination</label>
-                    <select class="form-control" name="destination-city" id="destination-city" placeholder="1">
-                        <% for(Cities city: cities){ %>
-                        <option value="<%=city.getId()%>"><%= city.getName() %></option>
-                        <%}%>
-                    </select>
+                <div class="card-pricing d-flex w-3/12 flex-column align-items-center justify-content-center">
+                    <div class="price font-weight-bold"><%= price %> $</div>
+                    <a id="submit-button" href="" class="rounded border border-danger py-1 px-2 font-medium "> submit </a>
                 </div>
-                <div class="col-lg-2 mt-lg-n2 mt-2">
-                    <label class="">Person</label>
-                    <select class="form-control" name="persons" id="persons" placeholder="1">
-                        <option value="1" selected="">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-4 mt-lg-4 mt-2">
-                    <label class="">Aller : </label>
-                    <input name="departure-date" class="form-control datepicker-1 flatpickr-input active" placeholder="Please select check in date" type="date" readonly="readonly">
-                </div>
-                <div class="col-lg-4 mt-lg-4 mt-2">
-                    <label class="">Retour : </label>
-                    <input name="return-date" class="form-control datepicker-2 flatpickr-input active" placeholder="Please select check out date" type="date" readonly="readonly">
-                </div>
-
-                <div class="col-lg-4  mt-lg-4 mt-2  ">
-                    <label style="color: white">blanc </label>
-                    <button type="submit" class="btn bg-gradient-dark w-100">Book now</button>
-                </div>
-
-            </form>
-
+            </div>
         </div>
+        <%} %>
 
     </div>
-
 </header>
+
 
 
 
@@ -169,3 +161,4 @@
     }
 </script>
 </body>
+
