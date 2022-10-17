@@ -8,7 +8,7 @@ public class Routes {
     private int arrival_city;
     private double price;
     private int duration;
-    private LocalTime start_time;
+    private String start_time;
 
     public int getId() {
         return id;
@@ -50,11 +50,11 @@ public class Routes {
         this.duration = duration;
     }
 
-    public LocalTime getStart_time() {
+    public String getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(LocalTime start_time) {
+    public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
 }

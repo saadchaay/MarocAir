@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalTime;
 
 //@WebServlet("/admin/")
 @WebServlet(name = "RouteTravelController", value = "/admin/route-trip")
@@ -55,10 +56,16 @@ public class RouteTravelController extends HttpServlet {
         route.setArrival_city(Integer.parseInt(request.getParameter("arrival_city")));
         route.setPrice(Double.parseDouble(request.getParameter("price")));
         route.setDuration(Integer.parseInt(request.getParameter("duration")));
+        route.setStart_time(request.getParameter("start_time"));
         if(routesDao.save(route))
             response.sendRedirect("/admin/route-trip");
         else{
-            request.setAttribute("errorMsg", "Failed add new trip, try again!!");
+            request.setAttribute("errorMsg", "Failed to add new trip, try again!!");
+            try {
+                request.setAttribute("cities", citiesDao.getAll());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             request.getRequestDispatcher("/admin/new-route.jsp").forward(request, response);
         }
     }

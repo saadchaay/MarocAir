@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: ssaad_chaay
@@ -74,6 +75,7 @@
                                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                             <th class="px-4 py-3">Departed City</th>
                                             <th class="px-4 py-3">Arrival City</th>
+                                            <th class="px-4 py-3">Start time</th>
                                             <th class="px-4 py-3">Duration</th>
                                             <th class="px-4 py-3">Price</th>
                                             <th class="px-4 py-3">Actions</th>
@@ -112,7 +114,11 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    ${route.duration} Minutes
+                                                    ${route.start_time}
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <fmt:parseNumber var="intDuration" value="${(route.duration / 60)}" integerOnly="true" />
+                                                    ${intDuration} h ${(route.duration % 60)} Minutes
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
                                                     DH ${route.price}

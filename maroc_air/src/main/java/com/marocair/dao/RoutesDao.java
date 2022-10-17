@@ -24,6 +24,7 @@ public class RoutesDao implements DAO<Routes>{
             route.setArrival_city(res.getInt("arrival_city"));
             route.setPrice(res.getDouble("price"));
             route.setDuration(res.getInt("duration"));
+            route.setStart_time(String.valueOf(res.getTime("start_time")));
             return Optional.of(route);
         }
         return Optional.empty();
@@ -40,6 +41,7 @@ public class RoutesDao implements DAO<Routes>{
             route.setArrival_city(res.getInt("arrival_city"));
             route.setPrice(res.getDouble("price"));
             route.setDuration(res.getInt("duration"));
+            route.setStart_time(String.valueOf(res.getTime("start_time")));
             routes.add(route);
         }
         return routes;
@@ -48,7 +50,8 @@ public class RoutesDao implements DAO<Routes>{
     @Override
     public Boolean save(Routes route) {
 //        INSERT INTO public.routes (id, start_city, arrival_city, price, duration) VALUES (DEFAULT, 1::integer, 2::integer, 5463.00::numeric(7,2), 300::integer)
-        String rqt = "INSERT INTO routes (id, start_city, arrival_city, price, duration) VALUES(DEFAULT,"+ route.getStart_city() +","+ route.getArrival_city() +","+ route.getPrice() +","+ route.getDuration() +");";
+        String rqt = "INSERT INTO routes (id, start_city, arrival_city, price, duration, start_time) VALUES(DEFAULT,"+
+                route.getStart_city() +","+ route.getArrival_city() +","+ route.getPrice() +","+ route.getDuration() +", '"+ route.getStart_time() +"');";
         return db.execute(rqt);
     }
 
