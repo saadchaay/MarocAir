@@ -1,7 +1,5 @@
 package com.marocair.dao;
 
-
-
 import com.marocair.models.Clients;
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +16,8 @@ public class ClientDao implements DAO<Clients>{
     }
 
     @Override
-    public long save(Clients client) {
-        return 0;
+    public Boolean save(Clients client) {
+        return false;
     }
 
     @Override
@@ -28,7 +26,7 @@ public class ClientDao implements DAO<Clients>{
     }
 
     @Override
-    public void delete(long id) {
-
+    public Boolean delete(long id) {
+        return false;
     }
 }

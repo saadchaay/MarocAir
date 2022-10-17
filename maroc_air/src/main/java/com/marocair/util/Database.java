@@ -1,17 +1,18 @@
 package com.marocair.util;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 import javax.swing.text.html.Option;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
+
 public class Database {
 
     private Statement stmt;
     private PreparedStatement preparedStatement;
     private Connection cnx;
+    private PreparedStatement preStmt;
     public String URL;
     public String NAME;
     public String USER;
@@ -27,6 +28,13 @@ public class Database {
             Class.forName("org.postgresql.Driver");
             cnx = DriverManager.getConnection(URL + NAME, USER, PASS);
             System.out.println("Connection successfully");
+//            URL = dotEnv.get("URL");
+//            NAME = dotEnv.get("DB_NAME");
+//            USER = dotEnv.get("USER");
+//            PASS = dotEnv.get("PASSWORD");
+//          Class.forName("org.postgresql.Driver");
+//            cnx = DriverManager.getConnection("jdbc:postgresql://localhost:5000/" + "maroc_air", "postgres", "password");
+//            System.out.println("Connection successfully");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -41,6 +49,13 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
+
+//    public boolean prepare(String request) throws SQLException {
+//        preStmt = cnx.prepareStatement(request);
+//        System.out.println(preStmt);
+//        ResultSet rs = preStmt.executeQuery();
+//        return rs.next();
+//    }
 
     public boolean execute(String rq) {
         this.query(rq);

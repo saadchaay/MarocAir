@@ -1,19 +1,22 @@
 package com.marocair.dao;
 
 
+import com.oracle.wls.shaded.org.apache.xpath.operations.Bool;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public interface DAO<T> {
 
-    Optional<T> get(long id);
+    Optional<T> get(long id) throws SQLException;
 
-    List<T> getAll();
+    List<T> getAll() throws SQLException;
 
-    long save(T t);
+    Boolean save(T t);
 
     void update(T t, String[] params);
 
-    void delete(long id);
+    Boolean delete(long id);
 
 }

@@ -6,6 +6,13 @@ services:
 #      - 2005:8080
 #    volumes:
 #      - C:\Users\Youcode\IdeaProjects\JEETomcat\target\JEETomcat:/usr/local/tomcat/webapps/JEETomcat
+  maroc_air:
+    image: tahalechgar/maroc_air
+    ports:
+      - 2005:8080
+#    volumes:
+#      - C:\Users\ssaad_chaay\Desktop\JAVA Briefs\MarocAir_project\maroc_air\target\maroc_air-1.0-SNAPSHOT:/usr/local/tomcat/webapps/JEETomcat
+
   postgresql:
     image: postgres
     restart: always

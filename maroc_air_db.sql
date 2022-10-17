@@ -99,3 +99,6 @@ create table res_routes
 
 alter table res_routes
     owner to postgres;
+
+
+INSERT INTO public.admin (id, username, password) VALUES (DEFAULT, 'admin'::varchar(100), 'admin123'::varchar(100))

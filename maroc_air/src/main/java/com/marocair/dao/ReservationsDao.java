@@ -17,8 +17,8 @@ public class ReservationsDao implements DAO<Reservations>{
     }
 
     @Override
-    public long save(Reservations reservations) {
-        return 0;
+    public Boolean save(Reservations reservations) {
+        return false;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ReservationsDao implements DAO<Reservations>{
     }
 
     @Override
-    public void delete(long id) {
-
+    public Boolean delete(long id) {
+        return false;
     }
 }

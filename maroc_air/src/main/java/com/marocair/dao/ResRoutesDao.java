@@ -17,8 +17,8 @@ public class ResRoutesDao implements DAO<Res_routes>{
     }
 
     @Override
-    public long save(Res_routes res_routes) {
-        return 0;
+    public Boolean save(Res_routes res_routes) {
+        return false;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ResRoutesDao implements DAO<Res_routes>{
     }
 
     @Override
-    public void delete(long id) {
-
+    public Boolean delete(long id) {
+        return false;
     }
 }

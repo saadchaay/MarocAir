@@ -17,9 +17,7 @@ public class RoundTripReservationsDao implements DAO<RoundTripReservations>{
     }
 
     @Override
-    public long save(RoundTripReservations roundTripReservations) {
-        return 0;
-    }
+    public Boolean save(RoundTripReservations roundTripReservations) { return false; }
 
     @Override
     public void update(RoundTripReservations roundTripReservations, String[] params) {
@@ -27,7 +25,7 @@ public class RoundTripReservationsDao implements DAO<RoundTripReservations>{
     }
 
     @Override
-    public void delete(long id) {
-
+    public Boolean delete(long id) {
+        return false;
     }
 }
