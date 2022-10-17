@@ -7,6 +7,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String userName = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies !=null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("username")) userName = cookie.getValue();
+        }
+    }
+    if(userName != null) response.sendRedirect("/admin/route-trip");
+%>
 <html>
     <head>
         <title>Title</title>

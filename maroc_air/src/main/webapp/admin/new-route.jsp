@@ -7,6 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+  String userName = null;
+  Cookie[] cookies = request.getCookies();
+  if(cookies !=null){
+    for(Cookie cookie : cookies){
+      if(cookie.getName().equals("username")) userName = cookie.getValue();
+    }
+  }
+  if(userName == null) response.sendRedirect("/admin/authentication");
+%>
 <html>
     <head>
         <title>Title</title>
@@ -24,7 +34,7 @@
                          src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
                          alt="Workflow">
                   </div>
-                  <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
+                  <nav class="mt-5 flex-1 px-2 bg-white space-y-1 mr-4">
                     <a href="${pageContext.request.contextPath}/admin/route-trip"
                        class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                       Dashboard
@@ -32,6 +42,10 @@
                     <a href="${pageContext.request.contextPath}/admin/add-route-trip"
                        class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                       Add new route
+                    </a>
+                    <a href="${pageContext.request.contextPath}/admin/logout"
+                       class="mr-8 text-red-500 group flex items-center px-2 py-2 text-md font-medium rounded-md underline">
+                      Logout
                     </a>
                   </nav>
                 </div>

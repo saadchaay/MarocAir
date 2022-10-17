@@ -29,6 +29,7 @@ public class UpdatedTripsController extends HttpServlet {
         upTrip.setStart_period(request.getParameter("start_period"));
         upTrip.setEnd_period(request.getParameter("end_period"));
         upTrip.setPrice(Double.parseDouble(request.getParameter("price")));
+        System.out.println(request.getParameter("routeId"));
         if(upTripDao.save(upTrip))
             response.sendRedirect("/admin/route-trip");
         else request.getRequestDispatcher("/admin/update-trip-price").forward(request, response);

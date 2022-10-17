@@ -7,6 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String userName = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies !=null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("username")) userName = cookie.getValue();
+        }
+    }
+    if(userName == null) response.sendRedirect("/admin/authentication");
+%>
 <html>
 <head>
     <title>Title</title>
@@ -32,6 +42,10 @@
                     <a href="${pageContext.request.contextPath}/admin/add-route-trip"
                        class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                         Add new route
+                    </a>
+                    <a href="${pageContext.request.contextPath}/admin/logout"
+                       class="mr-8 text-red-500 group flex items-center px-2 py-2 text-md font-medium rounded-md underline">
+                        Logout
                     </a>
                 </nav>
             </div>
@@ -119,7 +133,7 @@
                                             </div>
                                         </div>
                                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                            <button name="routeId" value="${route.id}" type="submit" class="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                                            <button name="routeId" value="${route.getId()}" type="submit" class="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
                                         </div>
                                     </div>
                                 </form>

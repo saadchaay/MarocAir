@@ -20,6 +20,7 @@ public class RoutesDao implements DAO<Routes>{
         ResultSet res = db.resultSet(rqt);
         while (res.next()){
             Routes route = new Routes();
+            route.setId(res.getInt("id"));
             route.setStart_city(res.getInt("start_city"));
             route.setArrival_city(res.getInt("arrival_city"));
             route.setPrice(res.getDouble("price"));
