@@ -88,7 +88,9 @@
                 <div class="card-info d-flex flex-row align-items-center justify-content-around" style="width: 80%">
                     <div class="cities-time w-6/12">
                         <div class="time font-weight-bold">10:30AM - 3:30PM</div>
+                        <% double price = 0; %>
                         <% for(Routes escale: possibleRoute){%>
+                        <% price += escale.getPrice(); %>
                         <div class="cities d-flex flex-row align-items-center justify-content-start gap-2">
                             <div class="departure"><%= citiesDao.get(escale.getStart_city()).get().getName() %></div>
                             <i class="fa fa-arrows-h" aria-hidden="true"></i>
@@ -100,7 +102,7 @@
                     <div class="duration w-3/12">3h 25min</div>
                 </div>
                 <div class="card-pricing d-flex w-3/12 flex-column align-items-center justify-content-center">
-                    <div class="price font-weight-bold">500 $</div>
+                    <div class="price font-weight-bold"><%= price %> $</div>
                     <a id="submit-button" href="" class="rounded border border-danger py-1 px-2 font-medium "> submit </a>
                 </div>
             </div>
