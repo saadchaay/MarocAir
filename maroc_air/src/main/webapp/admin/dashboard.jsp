@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: ssaad_chaay
@@ -7,6 +8,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page import="java.util.*" %>--%>
+<%
+    String userName = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies !=null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("username")) userName = cookie.getValue();
+        }
+    }
+    if(userName == null) response.sendRedirect("/admin/authentication");
+%>
 <html>
 <head>
     <title>Dashboard</title>
@@ -20,9 +32,10 @@
             <div class="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
                 <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                     <div class="flex items-center flex-shrink-0 px-4">
-                        <img class="h-8 w-auto"
+                        <%--<img class="h-8 w-auto"
                              src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                             alt="Workflow">
+                             alt="Workflow">--%>
+                        <h1 class="text-2xl w-auto h-8 my-2 text-bold mr-4"><span class="text-red-600 text-2xl">Maroc</span>Air</h1>
                     </div>
                     <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
                         <a href="${pageContext.request.contextPath}/admin/route-trip"
@@ -32,6 +45,10 @@
                         <a href="${pageContext.request.contextPath}/admin/add-route-trip"
                            class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                             Add new route
+                        </a>
+                        <a href="${pageContext.request.contextPath}/admin/logout"
+                           class="mr-8 text-red-500 group flex items-center px-2 py-2 text-md font-medium rounded-md underline">
+                            Logout
                         </a>
                     </nav>
                 </div>
@@ -74,6 +91,7 @@
                                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                             <th class="px-4 py-3">Departed City</th>
                                             <th class="px-4 py-3">Arrival City</th>
+                                            <th class="px-4 py-3">Start time</th>
                                             <th class="px-4 py-3">Duration</th>
                                             <th class="px-4 py-3">Price</th>
                                             <th class="px-4 py-3">Actions</th>
@@ -112,7 +130,11 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    ${route.duration} Minutes
+                                                    ${route.start_time}
+                                                </td>
+                                                <td class="px-4 py-3 text-sm">
+                                                    <fmt:parseNumber var="intDuration" value="${(route.duration / 60)}" integerOnly="true" />
+                                                    ${intDuration} h ${(route.duration % 60)} Minutes
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
                                                     DH ${route.price}

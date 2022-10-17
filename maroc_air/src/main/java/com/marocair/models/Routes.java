@@ -1,11 +1,14 @@
 package com.marocair.models;
 
+import java.time.LocalTime;
+
 public class Routes {
     private int id;
     private int start_city;
     private int arrival_city;
     private double price;
     private int duration;
+    private String start_time;
 
     public int getId() {
         return id;
@@ -45,5 +48,13 @@ public class Routes {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
     }
 }

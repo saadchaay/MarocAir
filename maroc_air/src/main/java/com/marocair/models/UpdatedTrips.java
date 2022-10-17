@@ -1,12 +1,10 @@
 package com.marocair.models;
 
-import java.util.Date;
-
 public class UpdatedTrips {
     private int id;
     private Long route_id;
-    private Date start_period;
-    private Date end_period;
+    private String start_period;
+    private String end_period;
     private double price;
 
     public int getId() {
@@ -25,19 +23,19 @@ public class UpdatedTrips {
         this.route_id = route_id;
     }
 
-    public Date getStart_period() {
-        return start_period;
+    public String getStart_period() {
+        return this.start_period;
     }
 
-    public void setStart_period(Date start_period) {
+    public void setStart_period(String start_period) {
         this.start_period = start_period;
     }
 
-    public Date getEnd_period() {
+    public String getEnd_period() {
         return end_period;
     }
 
-    public void setEnd_period(Date end_period) {
+    public void setEnd_period(String end_period) {
         this.end_period = end_period;
     }
 

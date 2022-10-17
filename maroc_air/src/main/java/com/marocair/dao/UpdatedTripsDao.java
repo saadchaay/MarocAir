@@ -26,8 +26,8 @@ public class UpdatedTripsDao implements DAO<UpdatedTrips>{
     @Override
     public Boolean save(UpdatedTrips updatedTrips) {
         String rqt = "INSERT INTO updated_trips(id, route_id, start_period, end_period, new_price) " +
-                "VALUES (DEFAULT, "+ updatedTrips.getRoute_id() +", "+ updatedTrips.getStart_period() +", "+
-                updatedTrips.getEnd_period() +", "+ updatedTrips.getPrice() +")";
+                "VALUES (DEFAULT, "+ updatedTrips.getRoute_id() +", '"+ updatedTrips.getStart_period() +"', '"+
+                updatedTrips.getEnd_period() +"', "+ updatedTrips.getPrice() +")";
         return db.execute(rqt);
     }
 

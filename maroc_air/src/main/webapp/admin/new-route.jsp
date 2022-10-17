@@ -7,6 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+  String userName = null;
+  Cookie[] cookies = request.getCookies();
+  if(cookies !=null){
+    for(Cookie cookie : cookies){
+      if(cookie.getName().equals("username")) userName = cookie.getValue();
+    }
+  }
+  if(userName == null) response.sendRedirect("/admin/authentication");
+%>
 <html>
     <head>
         <title>Title</title>
@@ -24,7 +34,7 @@
                          src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
                          alt="Workflow">
                   </div>
-                  <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
+                  <nav class="mt-5 flex-1 px-2 bg-white space-y-1 mr-4">
                     <a href="${pageContext.request.contextPath}/admin/route-trip"
                        class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                       Dashboard
@@ -32,6 +42,10 @@
                     <a href="${pageContext.request.contextPath}/admin/add-route-trip"
                        class="mr-4 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md underline">
                       Add new route
+                    </a>
+                    <a href="${pageContext.request.contextPath}/admin/logout"
+                       class="mr-8 text-red-500 group flex items-center px-2 py-2 text-md font-medium rounded-md underline">
+                      Logout
                     </a>
                   </nav>
                 </div>
@@ -68,6 +82,21 @@
                         <div class="w-full overflow-x-auto">
                           <form action="${pageContext.request.contextPath}/admin/route-trip" method="POST">
                             <div class="shadow sm:rounded-md sm:overflow-hidden">
+                              <c:if test="${errorMsg != null}" >
+                                <div class="rounded-md bg-red-50 p-4">
+                                  <div class="flex">
+                                    <div class="flex-shrink-0">
+                                      <!-- Heroicon name: solid/x-circle -->
+                                      <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                      </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                      <h3 class="text-sm font-medium text-red-800">${errorMsg}</h3>
+                                    </div>
+                                  </div>
+                                </div>
+                              </c:if>
                               <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
                                 <div>
                                   <h3 class="text-lg leading-6 font-medium text-gray-900">Add new Route</h3>
@@ -92,14 +121,19 @@
                                     </select>
                                   </div>
 
-                                  <div class="col-span-3">
+                                  <div class="col-span-2">
                                     <label for="price" class="block text-sm font-medium text-gray-700">Price(DH)</label>
                                     <input type="text" name="price" id="price" autocomplete="price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                   </div>
 
-                                  <div class="col-span-3">
+                                  <div class="col-span-2">
+                                    <label for="start_time" class="block text-sm font-medium text-gray-700">Start time</label>
+                                    <input type="time" name="start_time" id="start_time" autocomplete="start_time" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                  </div>
+
+                                  <div class="col-span-2">
                                     <label for="duration" class="block text-sm font-medium text-gray-700">Duration(Minutes)</label>
-                                    <input type="text" name="duration" id="duration" autocomplete="address-level2" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="duration" id="duration" autocomplete="duration" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                   </div>
                                 </div>
                               </div>

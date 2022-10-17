@@ -1,7 +1,6 @@
 package com.marocair.controllers;
 
 import com.marocair.dao.CitiesDao;
-import com.marocair.models.Cities;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

@@ -2,17 +2,14 @@ package com.marocair.controllers;
 
 import com.marocair.dao.CitiesDao;
 import com.marocair.dao.RoutesDao;
-import com.marocair.models.Cities;
 import com.marocair.models.Routes;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.Optional;
+import java.time.LocalTime;
 
 //@WebServlet("/admin/")
 @WebServlet(name = "RouteTravelController", value = "/admin/route-trip")
@@ -41,16 +38,15 @@ public class RouteTravelController extends HttpServlet {
                 }
                 case "delete" -> DeleteRouteTrip(routeId, response);
             }
+        }else {
+            try {
+                request.setAttribute("routes", routesDao.getAll());
+                request.setAttribute("cities", citiesDao.getAll());
+                request.getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-        try {
-            request.setAttribute("routes", routesDao.getAll());
-            request.setAttribute("cities", citiesDao.getAll());
-            RequestDispatcher view = request.getRequestDispatcher("/admin/dashboard.jsp");
-            view.forward(request, response);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     @Override
@@ -59,11 +55,23 @@ public class RouteTravelController extends HttpServlet {
         route.setArrival_city(Integer.parseInt(request.getParameter("arrival_city")));
         route.setPrice(Double.parseDouble(request.getParameter("price")));
         route.setDuration(Integer.parseInt(request.getParameter("duration")));
-        if(routesDao.save(route))
-            response.sendRedirect("/admin/route-trip");
-        else{
-            request.setAttribute("errorMsg", "Failed add new trip, try again!!");
+        route.setStart_time(request.getParameter("start_time"));
+        if(Integer.parseInt(request.getParameter("start_city"))
+                == Integer.parseInt(request.getParameter("arrival_city"))){
+            request.setAttribute("errorMsg", "Failed, try again!");
             request.getRequestDispatcher("/admin/new-route.jsp").forward(request, response);
+        }else {
+            if(routesDao.save(route))
+                response.sendRedirect("/admin/route-trip");
+            else{
+                request.setAttribute("errorMsg", "Failed to add new trip, try again!!");
+                try {
+                    request.setAttribute("cities", citiesDao.getAll());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                request.getRequestDispatcher("/admin/new-route.jsp").forward(request, response);
+            }
         }
     }
 
@@ -73,12 +81,8 @@ public class RouteTravelController extends HttpServlet {
     }
 
     public void UpdatePriceTrip(Long routeId, HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException, SQLException {
-        // save in updated_trips table ...
         Routes route = routesDao.get(routeId).isPresent() ? routesDao.get(routeId).get() : null;
-//        PrintWriter pr = response.getWriter();
         assert route != null;
-//        pr.println("City "+ route.getStart_city());
-        System.out.println("City: "+route.getStart_city());
         request.setAttribute("route", route);
         try {
             request.setAttribute("cities", citiesDao.getAll());
