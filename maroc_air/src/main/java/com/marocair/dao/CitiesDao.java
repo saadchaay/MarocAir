@@ -3,8 +3,7 @@ package com.marocair.dao;
 import com.marocair.models.Cities;
 import com.marocair.util.Database;
 
-import java.sql.PreparedStatement;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +75,8 @@ public class CitiesDao implements DAO<Cities> {
     }
 
     @Override
-    public void delete(long id) {
+    public Boolean delete(long id) {
 
+        return null;
     }
 }

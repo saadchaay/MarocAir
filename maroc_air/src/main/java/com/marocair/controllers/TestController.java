@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,11 @@ public class TestController extends HttpServlet {
 
         Routes currentRoute;
 
-        routes = routesDao.getAll();
+        try {
+            routes = routesDao.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         response.getWriter().println(routes);
 
         for(Routes route: routes){

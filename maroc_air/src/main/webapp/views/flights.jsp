@@ -3,7 +3,11 @@
 <%@ page import="com.marocair.models.Cities" %>
 <%@ page import="com.marocair.models.Routes" %>
 <%@ page import="com.marocair.dao.CitiesDao" %>
-<%@ page import="java.time.Duration" %><%--
+<%@ page import="java.time.Duration" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.ParseException" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.lang.reflect.Array" %><%--
   Created by IntelliJ IDEA.
   User: Youcode
   Date: 10/14/2022
@@ -83,32 +87,32 @@
 <header class="position-relative z-index-3 ">
     <div class="page-header min-vh-75 m-3 d-flex flex-column  border-radius-xl" style="background-image: url(https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80)">
         <span class="mask bg-gradient-dark"></span>
-        <%         for(ArrayList<Routes> possibleRoute: possibleRoutes){ %>
+        <%         for(ArrayList<Routes> possibleRoute: possibleRoutes) { %>
         <div class="container w-11/12 text-gray-600">
             <div class="card-container bg-white mx-6 my-2 mt-4 d-flex w-full flex-row justify-content-between rounded border border-gray-200 p-3 pe-6 ps-0">
                 <div class="card-info d-flex flex-row align-items-center justify-content-around" style="width: 80%">
                     <div class="cities-time w-6/12">
-                        <div class="time font-weight-bold">10:30AM - 3:30PM</div>
+                        <div class="time font-weight-bold"><%=possibleRoute.get(0).getStart_time()%> - 3:30PM</div>
                         <% double price = 0; %>
                         <% int duration = 0; %>
-                        <% for(Routes escale: possibleRoute){%>
+                        <% for (Routes escale : possibleRoute) {%>
                         <% price += escale.getPrice(); %>
                         <% duration += escale.getDuration(); %>
                         <div class="cities d-flex flex-row align-items-center justify-content-start gap-2">
-                            <div class="departure"><%= citiesDao.get(escale.getStart_city()).get().getName() %></div>
+                            <div class="departure"><%=citiesDao.get(escale.getStart_city()).get().getName()%></div>
                             <i class="fa fa-arrows-h" aria-hidden="true"></i>
-                            <div class="destination"><%= citiesDao.get(escale.getArrival_city()).get().getName() %></div>
+                            <div class="destination"><%=citiesDao.get(escale.getArrival_city()).get().getName()%></div>
                         </div>
                         <%}%>
                     </div>
                     <% int hours = duration / 60; %>
                     <% int minutes = duration % 60; %>
-                    <div class="escale w-3/12"><%= possibleRoute.size() %> escales</div>
-                    <div class="duration w-3/12"><%=hours%>h <%= minutes%>min</div>
+                    <div class="escale w-3/12"><%=possibleRoute.size()%> escales</div>
+                    <div class="duration w-3/12"><%=hours%>h <%=minutes%>min</div>
                 </div>
                 <div class="card-pricing d-flex w-3/12 flex-column align-items-center justify-content-center">
-                    <div class="price font-weight-bold"><%= price %> $</div>
-                    <a id="submit-button" href="" class="rounded border border-danger py-1 px-2 font-medium "> submit </a>
+                    <div class="price font-weight-bold"><%=price%> DH</div>
+                    <a id="submit-button" href="${pageContext.request.contextPath}/reservation?action=booking&routeId=<%=possibleRoute.get(0).getId()%>" class="rounded border border-danger py-1 px-2 font-medium "> Book </a>
                 </div>
             </div>
         </div>

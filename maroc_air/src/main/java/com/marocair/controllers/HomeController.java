@@ -7,6 +7,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(name = "HomeController", value = "/HomeController")
@@ -15,7 +16,12 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         CitiesDao citiesDao = new CitiesDao();
-        ArrayList<Cities> cities = (ArrayList<Cities>) citiesDao.getAll();
+        ArrayList<Cities> cities = null;
+        try {
+            cities = (ArrayList<Cities>) citiesDao.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         request.setAttribute("cities", cities);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/home.jsp");
         dispatcher.forward(request, response);

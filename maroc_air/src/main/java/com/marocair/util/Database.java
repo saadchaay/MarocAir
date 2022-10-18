@@ -23,11 +23,9 @@ public class Database {
             URL = "jdbc:postgresql://localhost:5000/";
             NAME = "maroc_air";
             USER = "postgres";
-            PASS = "password" +
-                    "";
+            PASS = "password" ;
             Class.forName("org.postgresql.Driver");
             cnx = DriverManager.getConnection(URL + NAME, USER, PASS);
-            System.out.println("Connection successfully");
 //            URL = dotEnv.get("URL");
 //            NAME = dotEnv.get("DB_NAME");
 //            USER = dotEnv.get("USER");
