@@ -1,7 +1,5 @@
 package com.marocair.models;
 
-import java.time.LocalTime;
-
 public class Routes {
     private int id;
     private int start_city;
@@ -57,4 +55,6 @@ public class Routes {
     public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
+
+
 }

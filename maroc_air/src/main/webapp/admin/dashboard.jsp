@@ -117,8 +117,6 @@
                                                 <td class="px-4 py-3">
                                                     <div class="flex items-center text-sm">
                                                         <div>
-<%--                                                            <p class="font-semibold">${route.arrival_city} United State,--%>
-<%--                                                                Los Angelos</p>--%>
                                                             <p class="font-semibold">
                                                                 <c:forEach items="${cities}" var="city">
                                                                     <c:if test="${city.id == route.arrival_city}">

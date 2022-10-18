@@ -10,13 +10,48 @@ import java.util.List;
 import java.util.Optional;
 
 public class CitiesDao implements DAO<Cities> {
+
+    private final String table = "Cities";
     Database db = new Database();
     @Override
     public Optional<Cities> get(long id) {
-        return Optional.empty();
+        try{
+            Database db = new Database();
+            String query = "select * from " + table + " where id = " + id;
+            ResultSet resultSet = db.resultSet(query);
+            Cities city = new Cities();
+            while(resultSet.next()){
+                city.setId(resultSet.getInt("id"));
+                city.setName(resultSet.getString("name"));
+            }
+            return Optional.of(city);
+        }catch(Exception exception){
+
+            return Optional.empty();
+        }
     }
 
     @Override
+  /*    public List<Cities> getAll() {
+        try{
+            Database db = new Database();
+            String query = "select * from " + table;
+            ResultSet resultSet = db.resultSet(query);
+            ArrayList<Cities> cities = new ArrayList<>();
+            while(resultSet.next()){
+                Cities city = new Cities();
+                city.setId(resultSet.getInt("id"));
+                city.setName(resultSet.getString("name"));
+                cities.add(city);
+            }
+            return cities;
+        }catch(Exception exception){
+
+            return null;
+        }
+    }
+    */
+
     public List<Cities> getAll() throws SQLException {
         List<Cities> cites = new ArrayList<>();
         String rq = "SELECT * FROM cities";
@@ -37,11 +72,11 @@ public class CitiesDao implements DAO<Cities> {
 
     @Override
     public void update(Cities cities, String[] params) {
-
     }
 
     @Override
     public Boolean delete(long id) {
-        return false;
+
+        return null;
     }
 }
