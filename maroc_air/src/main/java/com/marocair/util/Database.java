@@ -1,11 +1,8 @@
 package com.marocair.util;
 
-
-import javax.swing.text.html.Option;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Optional;
-
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
 
@@ -20,19 +17,13 @@ public class Database {
 
     public Database(){
         try {
-            URL = "jdbc:postgresql://localhost:5000/";
-            NAME = "maroc_air";
-            USER = "postgres";
-            PASS = "password" ;
+            Dotenv dotEnv = Dotenv.configure().load();
+            URL = dotEnv.get("URL");
+            NAME = dotEnv.get("DB_NAME");
+            USER = dotEnv.get("USER");
+            PASS = dotEnv.get("PASSWORD");
             Class.forName("org.postgresql.Driver");
             cnx = DriverManager.getConnection(URL + NAME, USER, PASS);
-//            URL = dotEnv.get("URL");
-//            NAME = dotEnv.get("DB_NAME");
-//            USER = dotEnv.get("USER");
-//            PASS = dotEnv.get("PASSWORD");
-//          Class.forName("org.postgresql.Driver");
-//            cnx = DriverManager.getConnection("jdbc:postgresql://localhost:5000/" + "maroc_air", "postgres", "password");
-//            System.out.println("Connection successfully");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
