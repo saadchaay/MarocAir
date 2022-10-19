@@ -43,4 +43,4 @@ build/
 .DS_Store
 
 ## .env file ###
-.env
+src/main/resources/.env
